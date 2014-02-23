@@ -1,0 +1,23 @@
+apply plugin: 'scala'
+apply plugin: 'eclipse'
+
+def PROJECT_MAIN_CLASS = 'com.creatifcubed.clavier.App'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile 'org.scala-lang:scala-library:2.10.3'
+}
+
+jar {
+	manifest {
+		attributes('Implementation-Title': 'Gradle', 'Main-Class': PROJECT_MAIN_CLASS)
+	}
+	from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+}
+
+tasks.withType(ScalaCompile) {
+	scalaCompileOptions.useAnt = false
+}
