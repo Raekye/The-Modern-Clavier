@@ -25,7 +25,7 @@ homepage:            https://github.com/Raekye/The-Modern-Clavier
 license:             MIT
 
 -- The file containing the license text.
-license-file:        LICENSE
+license-file:        ../LICENSE
 
 -- The package author(s).
 author:              Raekye
@@ -47,7 +47,8 @@ cabal-version:       >=1.8
 
 executable clavier
   -- .hs or .lhs file containing the Main module.
-  -- main-is:             
+  main-is:             Clavier/Main.hs
+  hs-source-dirs: src
   
   -- Modules included in this executable, other than Main.
   -- other-modules:       
