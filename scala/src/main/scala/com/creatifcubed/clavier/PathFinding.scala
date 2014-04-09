@@ -57,12 +57,31 @@ object PathFinding {
 
 	def main(args: Array[String]): Unit = {
 		val g = new Graph2dCartesianGrid(16, 16);
-		g.mark(14, 14, true);
+		g.mark(14, 14, true).mark(13, 14, true);
 		val start = new Graph2dCartesianGrid.Node(g, 0, 0);
 		val end = new Graph2dCartesianGrid.Node(g, 15, 15);
 		val path = astar(g, start, end);
+		val m = Array.fill[Char](g.yBound, g.xBound) { ' ' };
+		for (i <- 0 until g.xBound) {
+			for (j <- 0 until g.yBound) {
+				g.at(i, j) match {
+					case Some(true) =>
+						m(j)(i) = '#';
+					case _ =>
+				}
+			}
+		}
 		for (n <- path) {
-			println(n.x.toString + ", " + n.y.toString);
+			m(n.y)(n.x) = 'x';
+		}
+		m(start.y)(start.x) = 's';
+		m(end.y)(end.x) = 'e';
+		for (row <- m) {
+			for (ch <- row) {
+				print(ch);
+				print(' ');
+			}
+			println();
 		}
 	}
 }
